@@ -1,12 +1,12 @@
 pragma solidity ^0.4.24;
 
-import "zeppelin-solidity/contracts/token/ERC721/ERC721.sol";
+import "zeppelin-solidity/contracts/token/ERC721/ERC721Basic.sol";
 import "zeppelin-solidity/contracts/token/ERC20/ERC20.sol";
 
 
 contract PropertyRegistry {
   
-  ERC721 propertyContract;
+  ERC721Basic propertyContract;
   ERC20 propertyToken;
 
   struct Data {
@@ -33,7 +33,7 @@ contract PropertyRegistry {
   }
 
   constructor(address _propertyContract) public {
-    propertyContract = ERC721(_propertyContract);
+    propertyContract = ERC721Basic(_propertyContract);
   }
 
   function getPropertyDetails(uint256 _tokenId) public view returns(uint256, address, string) {
