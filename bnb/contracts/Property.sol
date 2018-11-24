@@ -1,6 +1,5 @@
 pragma solidity ^0.4.24;
 
-import "./HelloWorld.sol";
 import "zeppelin-solidity/contracts/token/ERC721/ERC721Token.sol";
 
 contract Property is ERC721Token {
