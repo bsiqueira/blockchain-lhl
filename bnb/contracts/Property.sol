@@ -19,19 +19,6 @@ contract Property is ERC721Token {
     require(msg.sender == guest, "Not an invited guest!");
     _;
   }
-
-  // function inviteGuest(address _guest) external onlyOwner returns(address) {
-  //   guest = _guest;
-  //   return guest;
-  // }
-  // function reserveRoom() external payable onlyGuest returns(bool) {
-  //   if(msg.sender.balance >= propertyFee) {
-  //     tokenOwner.transfer(propertyFee);
-  //     return true;
-  //   } else {
-  //     revert("Balance too low");
-  //   }
-  // }
   
   function createProperty() external {
     _mint(msg.sender, allTokens.length + 1);
@@ -43,5 +30,13 @@ contract Property is ERC721Token {
 
   function getURI(uint256 _tokenId) external view returns(string) {
     return tokenURIs[_tokenId];
+  }
+
+  function getAllTokens() external view returns(uint256[]) {
+    return allTokens;
+  }
+
+  function getAllOwnedTokens(address owner) external view returns(uint256[]) {
+    return ownedTokens[owner];
   }
 }

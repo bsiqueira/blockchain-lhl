@@ -1,12 +1,12 @@
 pragma solidity ^0.4.24;
 
-import "zeppelin-solidity/contracts/token/ERC721/ERC721Basic.sol";
+import "zeppelin-solidity/contracts/token/ERC721/ERC721BasicToken.sol";
 import "zeppelin-solidity/contracts/token/ERC20/ERC20.sol";
 
 
 contract PropertyRegistry {
   
-  ERC721Basic propertyContract;
+  ERC721BasicToken propertyContract;
   ERC20 propertyToken;
 
   struct Data {
@@ -39,9 +39,13 @@ contract PropertyRegistry {
   event CheckOut(uint256 indexed _tokenId); 
 
   constructor(address _propertyContract, address _propertyToken) public {
-    propertyContract = ERC721Basic(_propertyContract);
+    propertyContract = ERC721BasicToken(_propertyContract);
     propertyToken = ERC20(_propertyToken);
   }
+
+  // function getAllPropertyIds() public view returns(uint256) {
+  //   return propertyDetails
+  // }
 
   function getPropertyDetails(uint256 _tokenId) public view returns(uint256, string) {
     return (propertyDetails[_tokenId].price, propertyDetails[_tokenId].uri);
@@ -52,9 +56,9 @@ contract PropertyRegistry {
     propertyDetails[_tokenId].occupant, propertyDetails[_tokenId].checkIn, propertyDetails[_tokenId].checkOut);
   }
 
-  function getProperties() external view returns(uint256[]) {
-    return ownedTokens[msg.sender];
-  }
+  // function getProperties() external view returns(uint256[]) {
+  //   return ownedTokens[msg.sender];
+  // }
 
   function registerProperty(uint256 _tokenId, uint256 _price, string _uri) public onlyOwner(_tokenId) {
     propertyDetails[_tokenId] = Data(_price, address(0), address(0), address(0), 0, 0, 0, _uri);

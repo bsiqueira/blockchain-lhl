@@ -11,6 +11,7 @@
  *     gasPrice: 10000000000,
  *   },
  */
+var path = require('path');
 
 module.exports = {
   networks: {
@@ -19,5 +20,6 @@ module.exports = {
       port: "7545",
       network_id: "*"
     }
-  }
+  },
+  contracts_build_directory: path.join(__dirname, "client/src/contracts")
 };
